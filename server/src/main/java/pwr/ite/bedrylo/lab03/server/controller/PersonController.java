@@ -7,6 +7,7 @@ import pwr.ite.bedrylo.lab03.server.model.Person;
 import pwr.ite.bedrylo.lab03.server.repository.PersonRepository;
 import pwr.ite.bedrylo.lab03.server.services.PersonService;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -28,12 +29,13 @@ public class PersonController {
     
     @GetMapping("/get/all")
     public ResponseEntity<Set<PersonDto>> getAllPersons() {
-        return ResponseEntity.ok(personService.createDtoSet(new java.util.HashSet<>(personRepository.findAll())));
+        return ResponseEntity.ok(personService.createDtoSet(new HashSet<>(personRepository.findAll())));
     }
     
     
     @PostMapping("/add")
-    public ResponseEntity<PersonDto> addPerson(@RequestBody Person person) {
+    public ResponseEntity<PersonDto> addPerson(@RequestBody PersonDto personDto) {
+        Person person = personService.createPerson(personDto);
         personRepository.saveAndFlush(person);
         return ResponseEntity.ok(personService.createDto(person));
     }

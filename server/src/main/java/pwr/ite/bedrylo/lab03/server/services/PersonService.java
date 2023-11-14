@@ -7,6 +7,7 @@ import pwr.ite.bedrylo.lab03.server.repository.PersonRepository;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +20,7 @@ public class PersonService {
     
     public PersonDto createDto(Person person){
         PersonDto personDto = new PersonDto();
+        personDto.setId(person.getId());
         personDto.setName(person.getName());
         personDto.setPesel(person.getPesel());
         personDto.setRole(person.getRole());
