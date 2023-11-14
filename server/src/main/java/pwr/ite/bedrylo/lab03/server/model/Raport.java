@@ -12,7 +12,7 @@ public class Raport extends BaseEntity{
     
     @OneToOne(optional = false)
     @JoinColumn(nullable = false, unique = true)
-    private Registration registrationId;
+    private Registration registration;
     
     @Column(nullable = false, length = 2000)
     private String description;

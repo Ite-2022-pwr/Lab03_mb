@@ -6,6 +6,7 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
 public abstract class BaseEntity {
     
     @Id
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @UuidGenerator
     @Column(name = "id", unique = true, nullable = false)
     private UUID id;
 }
