@@ -8,6 +8,7 @@ import pwr.ite.bedrylo.lab03.server.repository.TreeRepository;
 import pwr.ite.bedrylo.lab03.server.services.TreeService;
 
 import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -33,6 +34,11 @@ public class TreeController {
     @GetMapping("/get/{id}")
     public ResponseEntity<TreeDto> getTree(@PathVariable UUID id){
         return ResponseEntity.ok(treeService.createDto(treeRepository.findById(id).orElse(null)));
+    }
+    
+    @GetMapping("/get/registration/{id}")
+    public ResponseEntity<Set<TreeDto>> getTreesByRegistration(@PathVariable UUID id){
+        return ResponseEntity.ok(treeService.createDtoSet(new HashSet<>(treeRepository.findAllByRegistration(id))));
     }
     
     @GetMapping("/get/all")

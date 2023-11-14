@@ -35,9 +35,25 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.createDto(registrationRepository.findById(id).orElse(null)));
     }
     
+    @GetMapping("/get/person/{id}")
+    public ResponseEntity<Set<RegistrationDto>> getRegistrationByPerson(@PathVariable UUID id) {
+        return ResponseEntity.ok(registrationService.createDtoSet(new HashSet<>(registrationRepository.findAllByRegisteredBy(id))));
+    }
+    
     @PostMapping("/add")
     public ResponseEntity<RegistrationDto> addRegistration(@RequestBody RegistrationDto registrationDto) {
         Registration registration = registrationService.createRegistration(registrationDto);
+        registrationRepository.saveAndFlush(registration);
+        return ResponseEntity.ok(registrationService.createDto(registration));
+    }
+    
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<RegistrationDto> updateRegistration(@PathVariable UUID id, @RequestBody RegistrationDto registrationDto) {
+        Registration registration = registrationRepository.findById(id).orElse(null);
+        if (registration == null) {
+            return ResponseEntity.notFound().build();
+        }
+        registration = registrationService.updateRegistrationStatus(registration, registrationDto);
         registrationRepository.saveAndFlush(registration);
         return ResponseEntity.ok(registrationService.createDto(registration));
     }

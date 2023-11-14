@@ -6,8 +6,8 @@ import java.util.UUID;
 
 @Data
 public class DecisionDto {
-    private UUID uuid;
+    private UUID id;
     private String description;
     private RegistrationDto registration;
-    private PersonDto person;
+    private PersonDto approvedBy;
 }

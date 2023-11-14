@@ -48,5 +48,10 @@ public class RegistrationService {
         registration.setStatus(Status.CREATED);
         return registration;
     }
+    
+    public Registration updateRegistrationStatus(Registration registration, RegistrationDto registrationDto){
+        registration.setStatus(registrationDto.getRegistrationStatus());
+        return registration;
+    }
 
 }
