@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum Role {
-    BOSS("Kierownik"),
-    EMPLOYEE("Kontroler"),
-    CLIENT("Klient");
+    BOSS("kierownik"),
+    EMPLOYEE("kontroler"),
+    CLIENT("klient");
     
     private final String name;
     

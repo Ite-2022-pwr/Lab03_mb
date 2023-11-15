@@ -24,7 +24,8 @@ public class PersonController {
 
     @GetMapping("/get/{pesel}")
     public ResponseEntity<PersonDto> getPerson(@PathVariable String pesel) {
-        return ResponseEntity.ok(personService.createDto(personRepository.findByPesel(pesel).orElse(null)));
+        ResponseEntity responseEntity = ResponseEntity.ok(personService.createDto(personRepository.findByPesel(pesel).orElse(null)));
+        return responseEntity;
     }
     
     @GetMapping("/get/all")
