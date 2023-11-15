@@ -35,6 +35,11 @@ public class DecisionController {
         return ResponseEntity.ok(decisionService.createDtoSet(new HashSet<>(decisionRepository.findAll())));
     }
     
+    @GetMapping("/get/registeredby/{id}")
+    public ResponseEntity<Set<DecisionDto>> getDecisionsByRegisteredBy(@PathVariable UUID id) {
+        return ResponseEntity.ok(decisionService.createDtoSet(new HashSet<>(decisionRepository.findAllByRegistration_RegisteredBy(id))));
+    }
+    
     @PostMapping("/add")
     public ResponseEntity<DecisionDto> addDecision(@RequestBody DecisionDto decisionDto) {
         Decision decision = decisionService.createDecision(decisionDto);

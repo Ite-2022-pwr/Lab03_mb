@@ -5,4 +5,6 @@ module pwr.ite.bedrylo.lab03.client {
 
     opens pwr.ite.bedrylo.lab03.client to javafx.fxml;
     exports pwr.ite.bedrylo.lab03.client;
+    exports pwr.ite.bedrylo.lab03.client.service;
+    opens pwr.ite.bedrylo.lab03.client.service to javafx.fxml;
 }
