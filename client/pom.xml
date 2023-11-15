@@ -49,7 +49,27 @@
       <artifactId>spring-boot-starter-webflux</artifactId>
       <version>3.0.12</version>
     </dependency>
-    
+    <dependency>
+      <groupId>pl.softwizard</groupId>
+      <artifactId>BotInstaller</artifactId>
+      <version>6.0.13</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webflux</artifactId>
+      <version>6.0.13</version>
+    </dependency>
+    <dependency>
+      <groupId>io.projectreactor</groupId>
+      <artifactId>reactor-core</artifactId>
+      <version>3.5.11</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.30</version>
+    </dependency>
+
   </dependencies>
 
   <build>

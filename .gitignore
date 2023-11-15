@@ -70,3 +70,4 @@ server/!**/src/test/**/build/
 
 ### VS Code ###
 server/.vscode/
+/client/src/main/java/pwr/ite/bedrylo/lab03/client/Testing.java

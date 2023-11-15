@@ -1,6 +1,10 @@
 module pwr.ite.bedrylo.lab03.client {
     requires javafx.controls;
     requires javafx.fxml;
+    requires spring.web;
+    requires reactor.core;
+    requires spring.webflux;
+    requires lombok;
 
 
     opens pwr.ite.bedrylo.lab03.client to javafx.fxml;
