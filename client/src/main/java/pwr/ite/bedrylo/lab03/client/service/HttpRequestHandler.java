@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import reactor.core.publisher.Mono;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.nio.charset.StandardCharsets;
 
@@ -20,6 +21,7 @@ public class HttpRequestHandler<T> {
     public HttpRequestHandler(WebClient webClient) {
         this.webClient = webClient;
         this.objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
     }
 
     public <R> R sendRequest(String url, String method, Class<R> resultClass) {

@@ -46,6 +46,10 @@ public class RaportService {
         raport.setRegistration(registration);
         return raport;
     }
-    
-    
+
+
+    public Raport updateRaport(Raport raport, RaportDto raportDto) {
+        raport.setDescription(raportDto.getDescription());
+        return raport;
+    }
 }

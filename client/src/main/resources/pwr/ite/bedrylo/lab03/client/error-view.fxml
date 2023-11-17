@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pwr.ite.bedrylo.lab03.client.controller.ErrorViewController">
+   <children>
+      <Label text="Wystąpił błąd" />
+      <Button fx:id="closeButton" mnemonicParsing="false" onAction="#onErrorScreenButton" text="Zakończ program" />
+   </children>
+</VBox>

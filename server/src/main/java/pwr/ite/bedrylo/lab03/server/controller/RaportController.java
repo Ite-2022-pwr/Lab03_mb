@@ -35,9 +35,28 @@ public class RaportController {
         return ResponseEntity.ok(raportService.createDto(raportRepository.findById(id).orElse(null)));
     }
     
+    @GetMapping("/get/registration/{id}")
+    public ResponseEntity<RaportDto> getRaportByRegistrationId(@PathVariable UUID id) {
+        if (raportRepository.findByRegistrationId(id) == null) {
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(raportService.createDto(raportRepository.findByRegistrationId(id)));
+    }
+    
     @GetMapping("/get/all")
     public ResponseEntity<Set<RaportDto>> getAllRaport() {
         return ResponseEntity.ok(raportService.createDtoSet(new HashSet<>(raportRepository.findAll())));
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<RaportDto> updateRaport(@PathVariable UUID id, @RequestBody RaportDto raportDto) {
+        Raport raport = raportRepository.findById(id).orElse(null);
+        if (raport == null) {
+            return ResponseEntity.notFound().build();
+        }
+        raport = raportService.updateRaport(raport, raportDto);
+        raportRepository.saveAndFlush(raport);
+        return ResponseEntity.ok(raportService.createDto(raport));
     }
     
 }

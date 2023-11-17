@@ -6,6 +6,7 @@ module pwr.ite.bedrylo.lab03.client {
     requires spring.webflux;
     requires lombok;
     requires com.fasterxml.jackson.databind;
+    requires com.fasterxml.jackson.datatype.jsr310;
 
 
     opens pwr.ite.bedrylo.lab03.client to javafx.fxml, javafx.graphics;
@@ -16,5 +17,6 @@ module pwr.ite.bedrylo.lab03.client {
     opens pwr.ite.bedrylo.lab03.client.enums to com.fasterxml.jackson.databind, javafx.fxml;
     exports pwr.ite.bedrylo.lab03.client.controller;
     opens pwr.ite.bedrylo.lab03.client.controller to javafx.fxml, javafx.graphics;
+    opens pwr.ite.bedrylo.lab03.client.model to javafx.fxml, javafx.base;
 
 }

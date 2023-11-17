@@ -31,6 +31,17 @@ public class TreeController {
         return ResponseEntity.ok(treeService.createDto(tree));
     }
     
+    @PostMapping("/add/bulk")
+    public ResponseEntity<Set<TreeDto>> addBulkTree(@RequestBody Set<TreeDto> treeDtoSet){
+        Set<Tree> treeSet= new HashSet<Tree>();
+        for (TreeDto treeDto: treeDtoSet) {
+            Tree tree = treeService.createTree(treeDto);
+            treeSet.add(tree);
+            treeRepository.saveAndFlush(tree);
+        }
+        return ResponseEntity.ok(treeService.createDtoSet(treeSet));
+    }
+    
     @GetMapping("/get/{id}")
     public ResponseEntity<TreeDto> getTree(@PathVariable UUID id){
         return ResponseEntity.ok(treeService.createDto(treeRepository.findById(id).orElse(null)));

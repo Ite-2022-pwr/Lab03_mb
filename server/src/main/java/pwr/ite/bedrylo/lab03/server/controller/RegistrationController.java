@@ -11,6 +11,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import static pwr.ite.bedrylo.lab03.server.model.enums.Status.Status;
+
 @RestController
 @RequestMapping("/registration")
 public class RegistrationController {
@@ -40,6 +42,11 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.createDtoSet(new HashSet<>(registrationRepository.findAllByRegisteredBy(id))));
     }
     
+    @GetMapping("/get/all/status/{status}")
+    public ResponseEntity<Set<RegistrationDto>> getRegistrationByStatus(@PathVariable String status) {
+        return ResponseEntity.ok(registrationService.createDtoSet(new HashSet<>(registrationRepository.findAllByRegistrationStatus(Status(status)))));
+    }
+    
     @PostMapping("/add")
     public ResponseEntity<RegistrationDto> addRegistration(@RequestBody RegistrationDto registrationDto) {
         Registration registration = registrationService.createRegistration(registrationDto);
@@ -47,7 +54,7 @@ public class RegistrationController {
         return ResponseEntity.ok(registrationService.createDto(registration));
     }
     
-    @PatchMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<RegistrationDto> updateRegistration(@PathVariable UUID id, @RequestBody RegistrationDto registrationDto) {
         Registration registration = registrationRepository.findById(id).orElse(null);
         if (registration == null) {
