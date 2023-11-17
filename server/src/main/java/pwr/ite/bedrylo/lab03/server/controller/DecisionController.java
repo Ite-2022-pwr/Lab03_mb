@@ -1,6 +1,7 @@
 package pwr.ite.bedrylo.lab03.server.controller;
 
 
+import lombok.Data;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pwr.ite.bedrylo.lab03.server.dto.DecisionDto;
@@ -42,14 +43,30 @@ public class DecisionController {
     
     @GetMapping("/get/registrationid/{id}")
     public ResponseEntity<DecisionDto> getDecisionByRegistrationId(@PathVariable UUID id) {
-        return ResponseEntity.ok(decisionService.createDto(decisionRepository.findByRegistration_Id(id)));
+        Decision decision = decisionRepository.findByRegistration_Id(id);
+        if (decision == null) {
+            return ResponseEntity.ok(null);
+        }
+        return ResponseEntity.ok(decisionService.createDto(decision));
     }
     
     @PostMapping("/add")
     public ResponseEntity<DecisionDto> addDecision(@RequestBody DecisionDto decisionDto) {
         Decision decision = decisionService.createDecision(decisionDto);
+        System.out.println(decision);
         decisionRepository.saveAndFlush(decision);
         return ResponseEntity.ok(decisionService.createDto(decisionRepository.findById(decision.getId()).orElse(null)));
+    }
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<DecisionDto> updateDecision(@PathVariable UUID id, @RequestBody DecisionDto decisionDto) {
+        Decision decision = decisionRepository.findById(id).orElse(null);
+        if (decision == null) {
+            return ResponseEntity.ok(null);
+        }
+        decision = decisionService.updateDecision(decision, decisionDto);
+        decisionRepository.saveAndFlush(decision);
+        return ResponseEntity.ok(decisionService.createDto(decision));
     }
     
     

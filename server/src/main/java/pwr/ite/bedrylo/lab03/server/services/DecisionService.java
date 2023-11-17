@@ -2,8 +2,10 @@ package pwr.ite.bedrylo.lab03.server.services;
 
 import org.springframework.stereotype.Service;
 import pwr.ite.bedrylo.lab03.server.dto.DecisionDto;
+import pwr.ite.bedrylo.lab03.server.dto.RaportDto;
 import pwr.ite.bedrylo.lab03.server.model.Decision;
 import pwr.ite.bedrylo.lab03.server.model.Person;
+import pwr.ite.bedrylo.lab03.server.model.Raport;
 import pwr.ite.bedrylo.lab03.server.model.Registration;
 import pwr.ite.bedrylo.lab03.server.repository.DecisionRepository;
 import pwr.ite.bedrylo.lab03.server.repository.PersonRepository;
@@ -56,6 +58,11 @@ public class DecisionService {
         Person approvedBy = personRepository.findById(decisionDto.getApprovedBy().getId()).orElse(null);
         decision.setApprovedBy(approvedBy);
         decision.setRegistration(registration);
+        return decision;
+    }
+
+    public Decision updateDecision(Decision decision, DecisionDto decisionDto) {
+        decision.setDescription(decisionDto.getDescription());
         return decision;
     }
 }

@@ -52,7 +52,7 @@ public class RaportController {
     public ResponseEntity<RaportDto> updateRaport(@PathVariable UUID id, @RequestBody RaportDto raportDto) {
         Raport raport = raportRepository.findById(id).orElse(null);
         if (raport == null) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok(null);
         }
         raport = raportService.updateRaport(raport, raportDto);
         raportRepository.saveAndFlush(raport);
