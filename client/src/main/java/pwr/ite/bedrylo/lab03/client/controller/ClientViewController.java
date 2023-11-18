@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import org.springframework.web.reactive.function.client.WebClient;
 import pwr.ite.bedrylo.lab03.client.dto.DecisionDto;
 import pwr.ite.bedrylo.lab03.client.dto.RegistrationDto;
@@ -39,7 +41,7 @@ public class ClientViewController {
     private Label currentDate;
     
     @FXML
-    private Label currentDecision;
+    private TextFlow currentDecision;
     
     @FXML 
     private TableView<TreeTableModel> treeTable;
@@ -66,9 +68,11 @@ public class ClientViewController {
         if(selectedRegistration.getRegistrationStatus() == Status.FINISHED) {
             HttpRequestHandler<DecisionDto> decisionDtoHttpRequestHandler = new HttpRequestHandler<>(WebClient.create());
             var decision = decisionDtoHttpRequestHandler.sendRequest("/decision/get/registrationid/"+selectedRegistration.getId(), "GET", DecisionDto.class);
-            currentDecision.setText(decision.getDescription());
+            Text decisionText = new Text();
+            decisionText.setText(decision.getDescription());
+            currentDecision.getChildren().add(decisionText);
         } else 
-            currentDecision.setText("");
+            currentDecision.getChildren().clear();
     }
 
 
