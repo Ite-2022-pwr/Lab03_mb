@@ -24,7 +24,9 @@ public class SceneController {
     }
 
     public void switchScreen(String scene) {
+        
         mainScene.setRoot(screens.get(scene));
+        
     }
 
     private Pane loadFromFxml(String fileName) {

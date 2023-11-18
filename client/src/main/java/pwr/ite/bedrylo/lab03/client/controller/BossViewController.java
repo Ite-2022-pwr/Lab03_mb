@@ -7,10 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import org.springframework.web.reactive.function.client.WebClient;
-import pwr.ite.bedrylo.lab03.client.dto.DecisionDto;
-import pwr.ite.bedrylo.lab03.client.dto.RaportDto;
-import pwr.ite.bedrylo.lab03.client.dto.RegistrationDto;
-import pwr.ite.bedrylo.lab03.client.dto.TreeDto;
+import pwr.ite.bedrylo.lab03.client.dto.*;
 import pwr.ite.bedrylo.lab03.client.enums.Status;
 import pwr.ite.bedrylo.lab03.client.model.EmployeeRegistrationTableModel;
 import pwr.ite.bedrylo.lab03.client.model.TreeTableModel;
@@ -118,13 +115,17 @@ public class BossViewController {
     }
 
     public void sendDecision(MouseEvent mouseEvent) {
-            if (this.selectedRegistration == null || decisionField.getText().isEmpty() || this.selectedRegistration.getRegistrationStatus() == Status.CREATED) {
+            if (selectedRegistration == null || decisionField.getText().isEmpty() || this.selectedRegistration.getRegistrationStatus() == Status.CREATED) {
                 return;
             } else if (this.decisionData == null) {
                 DecisionDto decisionDto = new DecisionDto();
                 decisionDto.setDescription(decisionField.getText());
-                decisionDto.setRegistration(this.selectedRegistration);
-                decisionDto.setApprovedBy(sceneController.getActiveUser());
+                RegistrationDto decisionRegistrationDto = new RegistrationDto();
+                decisionRegistrationDto.setId(selectedRegistration.getId());
+                decisionDto.setRegistration(decisionRegistrationDto);
+                PersonDto decisionPersonDto = new PersonDto();
+                decisionPersonDto.setId(sceneController.getActiveUser().getId());
+                decisionDto.setApprovedBy(decisionPersonDto);
                 DecisionDto responseDecisionDto = decisionDtoHttpRequestHandler.sendRequest("/decision/add", "POST", DecisionDto.class, decisionDto, DecisionDto.class);
                 if (responseDecisionDto == null) {
                     return;

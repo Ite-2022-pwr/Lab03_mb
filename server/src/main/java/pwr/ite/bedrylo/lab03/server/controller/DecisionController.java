@@ -53,7 +53,7 @@ public class DecisionController {
     @PostMapping("/add")
     public ResponseEntity<DecisionDto> addDecision(@RequestBody DecisionDto decisionDto) {
         Decision decision = decisionService.createDecision(decisionDto);
-        System.out.println(decision);
+        System.out.println(decision.getId());
         decisionRepository.saveAndFlush(decision);
         return ResponseEntity.ok(decisionService.createDto(decisionRepository.findById(decision.getId()).orElse(null)));
     }

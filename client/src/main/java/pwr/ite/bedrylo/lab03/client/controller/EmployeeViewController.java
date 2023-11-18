@@ -121,6 +121,11 @@ public class EmployeeViewController {
                 return;
             }
             this.raportData = responseRaportDto;
+            clearFields();
         }
+    }
+
+    private void clearFields() {
+        raportField.setText("");
     }
 }

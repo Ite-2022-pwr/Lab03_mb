@@ -12,6 +12,7 @@ import pwr.ite.bedrylo.lab03.server.repository.PersonRepository;
 import pwr.ite.bedrylo.lab03.server.repository.RegistrationRepository;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,6 +54,7 @@ public class DecisionService {
     
     public Decision createDecision(DecisionDto decisionDto){
         Decision decision = new Decision();
+        decision.setId(UUID.randomUUID());
         decision.setDescription(decisionDto.getDescription());
         Registration registration = regstrationRepository.findById(decisionDto.getRegistration().getId()).orElse(null);
         Person approvedBy = personRepository.findById(decisionDto.getApprovedBy().getId()).orElse(null);

@@ -76,11 +76,19 @@ public class RegistrationAddViewController {
             Set<TreeDto> responseTreeDtoSet = treeDtoSetHttpRequestHandler.sendRequest("/tree/add/bulk", "POST", Set.class, treeDtoSet, Set.class);
             if (responseTreeDtoSet != null) {
                 message.setText("Wysłano pomyślnie");
+                clearFields();
             } else {
                 message.setText("Wystąpił błąd");
                 return;
             }
         }
+    }
+
+    private void clearFields() {
+        treeNameInput.setText("");
+        treeDiameterInput.setText("");
+        treeList.clear();
+        treeTable.setItems(treeList.stream().map(TreeTableModel::new).collect(Collectors.toCollection(FXCollections::observableArrayList)));
     }
 
     public void goBack(MouseEvent mouseEvent) {
